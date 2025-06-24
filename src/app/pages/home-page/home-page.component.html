@@ -1,0 +1,37 @@
+<div class="text-center mb-5 mt-5">
+  <h1 class="display-4 fw-bold">Bienvenido a Netec</h1>
+  <p class="lead text-secondary">Formación en tecnología para transformar tu futuro profesional</p>
+</div>
+
+<div class="container">
+  <div class="row align-items-center mb-5">
+    <div class="col-md-6">
+      <h2 class="fw-bold">¿Quiénes somos?</h2>
+      <p class="mt-5">
+        Somos una empresa dedicada a impartir cursos de programación, cloud, seguridad y desarrollo profesional.
+        Nuestros instructores son expertos en la industria y nuestras capacitaciones están alineadas con las
+        necesidades reales del mercado.
+      </p>
+      <a class="btn btn-dark mt-3" routerLink="/dashboard">Explora nuestros cursos</a>
+    </div>
+    <div class="col-md-6 text-center">
+      <img src="https://storagevefe.blob.core.windows.net/angulardeveloper/netec.png" alt="Cursos en línea"
+        class="img-fluid rounded shadow" />
+    </div>
+  </div>
+
+  <div class="row text-center">
+    @for(item of cards; track item){
+    <div class="col-md-4 mb-4">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title fw-bold">{{item.title}}</h5>
+          <p class="card-text">{{item.description}}</p>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+
+
+</div>
