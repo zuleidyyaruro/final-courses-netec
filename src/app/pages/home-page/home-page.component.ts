@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Card } from '../../interfaces/card.interface';
+import { Card } from '../../interfaces/course.interface';
 import { RouterLink } from '@angular/router';
 
 @Component({
