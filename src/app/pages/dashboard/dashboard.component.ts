@@ -1,8 +1,8 @@
 import { Component, inject, signal, OnInit, TemplateRef, WritableSignal } from '@angular/core';
 import { CardDashboard, Course } from '../../interfaces/course.interface';
 import { CoursesService } from '../../services/courses.service';
-import { ModalFormComponent } from '../../components/modal-form/modal-form.component';
 import { NgbModal, ModalDismissReasons, NgbDatepickerModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,9 +13,40 @@ import { NgbModal, ModalDismissReasons, NgbDatepickerModule, NgbTooltipModule } 
 })
 export class DashboardComponent implements OnInit {
 
+  private service: CoursesService = inject(CoursesService);
+  private build = inject(FormBuilder)
   private modalService = inject(NgbModal);
+
+  course = signal({
+    id: 0,
+    name: "",
+    description: "",
+    duration: "",
+    level: "",
+    price: 0
+  })
+
+  form: WritableSignal<FormGroup> = signal(this.build.group(this.course()));
   modalHeaderTitle = signal('')
   closeResult: WritableSignal<string> = signal('');
+  courses = signal<Course[]>([])
+
+
+  ngOnInit() {
+    this.getCourses();
+
+  }
+
+  buildForm(course: Course) {
+    this.form.set({
+      id: [course.id],
+      name: [course.name],
+      description: [course.description],
+      duration: [course.duration],
+      level: [course.level],
+      price: [course.price]
+    })
+  }
 
   cards: CardDashboard[] = [
     {
@@ -41,14 +72,6 @@ export class DashboardComponent implements OnInit {
     }
   ];
 
-  courses = signal<Course[]>([])
-
-  private service: CoursesService = inject(CoursesService);
-
-  ngOnInit() {
-    this.getCourses();
-  }
-
   getCourses() {
     this.service.getCourses().subscribe({
       next: values => this.courses.set(values),
@@ -57,7 +80,12 @@ export class DashboardComponent implements OnInit {
   }
 
   open(content: TemplateRef<any>, course: Course) {
-    if(course.id) this.modalHeaderTitle.set('Editar datos del curso')
+    this.buildForm(course);
+    if (course.id) {
+      this.modalHeaderTitle.set('Editar datos del curso')
+    } else {
+      this.modalHeaderTitle.set('Crear un curso')
+    }
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', centered: true, size: 'lg' }).result.then(
       (result) => {
         this.closeResult.set(`Closed with: ${result}`);

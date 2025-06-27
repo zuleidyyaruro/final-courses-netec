@@ -15,5 +15,5 @@ export interface Course {
   description: string,
   duration: string,
   level: string,
-  price: number
+  price: number  
 }
