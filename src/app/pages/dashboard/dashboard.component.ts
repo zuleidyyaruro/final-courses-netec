@@ -1,13 +1,20 @@
-import { Component, inject, signal, OnInit } from '@angular/core';
+import { Component, inject, signal, OnInit, TemplateRef, WritableSignal } from '@angular/core';
 import { CardDashboard, Course } from '../../interfaces/course.interface';
 import { CoursesService } from '../../services/courses.service';
+import { ModalFormComponent } from '../../components/modal-form/modal-form.component';
+import { NgbModal, ModalDismissReasons, NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  styleUrls: ['./dashboard.component.css'],
+  standalone: true,
+  imports: [NgbDatepickerModule]
 })
 export class DashboardComponent implements OnInit {
+
+  private modalService = inject(NgbModal);
+	closeResult: WritableSignal<string> = signal('');
 
   cards: CardDashboard[] = [
     {
@@ -48,4 +55,26 @@ export class DashboardComponent implements OnInit {
     })
   }
 
+  open(content: TemplateRef<any>, hola:string) {
+    console.log(hola)
+		this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', centered: true }).result.then(
+			(result) => {
+				this.closeResult.set(`Closed with: ${result}`);
+			},
+			(reason) => {
+				this.closeResult.set(`Dismissed ${this.getDismissReason(reason)}`);
+			},
+		);
+	}
+
+  private getDismissReason(reason: any): string {
+		switch (reason) {
+			case ModalDismissReasons.ESC:
+				return 'by pressing ESC';
+			case ModalDismissReasons.BACKDROP_CLICK:
+				return 'by clicking on a backdrop';
+			default:
+				return `with: ${reason}`;
+		}
+	}
 }
