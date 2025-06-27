@@ -21,7 +21,18 @@
     }
   </div>
 
-  <h4 class="mb-3 mt-5">Últimos cursos registrados</h4>
+  <div class="d-flex align-items-center justify-content-between mb-3 mt-5">
+    <h4>Últimos cursos registrados</h4>
+    <button type="button" class="btn btn-primary" style="margin-right: 10px;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle"
+        viewBox="0 0 16 16">
+        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+        <path
+          d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+      </svg>
+    </button>
+  </div>
+
 
   <table class="table table-bordered">
     <thead>
@@ -46,9 +57,9 @@
         <td>{{item.level}}</td>
         <td>{{item.price}}</td>
         <td>
-          <button type="button" class="btn btn-warning" style="margin-right: 10px;" (click)="open(content, 'hola')">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-              fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+          <button type="button" class="btn btn-warning" style="margin-right: 10px;" (click)="open(content, item)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+              class="bi bi-pencil-square" viewBox="0 0 16 16">
               <path
                 d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
               <path fill-rule="evenodd"
@@ -74,23 +85,22 @@
 
 <ng-template #content let-modal>
   <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
-      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    <h4 class="modal-title" id="modal-basic-title">{{this.modalHeaderTitle()}}</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
   </div>
-  <div class="modal-body">
-      <form>
-          <div class="mb-3">
-              <label for="dateOfBirth">Date of birth</label>
-              <div class="input-group">
-                  <input id="dateOfBirth" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker
-                      #dp="ngbDatepicker" />
-                  <button class="btn btn-outline-secondary bi bi-calendar3" (click)="dp.toggle()"
-                      type="button"></button>
-              </div>
-          </div>
-      </form>
+  <div class="modal-body" style="width: 500px;">
+    <form>
+      <div class="mb-3">
+        <label for="dateOfBirth">Date of birth</label>
+        <div class="input-group">
+          <input id="dateOfBirth" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker
+            #dp="ngbDatepicker" />
+          <button class="btn btn-outline-secondary bi bi-calendar3" (click)="dp.toggle()" type="button"></button>
+        </div>
+      </div>
+    </form>
   </div>
   <div class="modal-footer">
-      <button type="button" class="btn btn-outline-secondary" (click)="modal.close('Save click')">Save</button>
+    <button type="button" class="btn btn-outline-secondary" (click)="modal.close('Save click')">Save</button>
   </div>
 </ng-template>
