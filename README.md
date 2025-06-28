@@ -1,27 +1,44 @@
-# FinalCoursesNetec
+<h1 align="center">App final netec course</h1>
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.2.
+<!-- TABLE OF CONTENTS -->
 
-## Development server
+## Table of Contents
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- [Overview](#overview)
+- [Built With](#built-with)
+      
+<!-- OVERVIEW -->
 
-## Code scaffolding
+## Overview
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+**1. Home**
 
-## Build
+![screenshot](https://github.com/zuleidyyaruro/final-courses-netec/blob/main/screenshots/Screenshot_13.png?raw=true)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+**2. Dashboard**
 
-## Running unit tests
+![screenshot](https://github.com/zuleidyyaruro/final-courses-netec/blob/main/screenshots/Screenshot_14.png?raw=true)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+**3. Form for create course**
 
-## Running end-to-end tests
+![screenshot](https://github.com/zuleidyyaruro/final-courses-netec/blob/main/screenshots/Screenshot_15.png?raw=true)
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+**4. Form for edit course**
 
-## Further help
+![screenshot](https://github.com/zuleidyyaruro/final-courses-netec/blob/main/screenshots/Screenshot_16.png?raw=true)
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+**5. Toast**
+
+![screenshot](https://github.com/zuleidyyaruro/final-courses-netec/blob/main/screenshots/Screenshot_17.png?raw=true)
+
+**6. Delete course**
+
+![screenshot](https://github.com/zuleidyyaruro/final-courses-netec/blob/main/screenshots/Screenshot_18.png?raw=true)
+
+
+### Built With
+
+- [Angular 17](https://angular.io/guide/update-to-version-17)
+- [Bootstrap](https://getbootstrap.com/)
+- [SweetAlert](https://sweetalert2.github.io/)
+
