@@ -66,7 +66,7 @@
                 d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
             </svg>
           </button>
-          <button type="button" class="btn btn-danger">
+          <button type="button" class="btn btn-danger" (click)="deleteCourse(item.id!)">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash"
               viewBox="0 0 16 16">
               <path
@@ -88,19 +88,55 @@
     <h4 class="modal-title" id="modal-basic-title">{{this.modalHeaderTitle()}}</h4>
     <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
   </div>
-  <div class="modal-body" style="width: 500px;">
-    <form [formGroup]="form">
-      <div class="mb-3">
-        <label for="dateOfBirth">Date of birth</label>
-        <div class="input-group">
-          <input id="dateOfBirth" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker
-            #dp="ngbDatepicker" />
-          <button class="btn btn-outline-secondary bi bi-calendar3" (click)="dp.toggle()" type="button"></button>
+  <div class="modal-body">
+    <form [formGroup]="form" class="container">
+      <div class="row mb-3">
+        <label for="name" class="form-label">Nombre del curso</label>
+        <input type="text" class="form-control" id="name" placeholder="Nombre del curso" formControlName="name">
+        @if (form.controls.name.hasError('required')) {
+        <span class="fw-light text-danger">Este campo es obligatorio</span>
+        }
+      </div>
+      <div class="row mb-3">
+        <label for="description" class="form-label">Descripción</label>
+        <textarea class="form-control" id="description" rows="3" formControlName="description"></textarea>
+        @if (form.controls.description.hasError('required')) {
+        <span class="fw-light text-danger">Este campo es obligatorio</span>
+        }
+      </div>
+      <div class="row">
+        <div class="col-4">
+          <label for="duration" class="form-label">Duración</label>
+          <input type="text" class="form-control" id="duration" placeholder="1 hora" formControlName="duration">
+          @if (form.controls.duration.hasError('required')) {
+          <span class="fw-light text-danger">Este campo es obligatorio</span>
+          }
+        </div>
+        <div class="col-4">
+          <label for="price" class="form-label">Nivel</label>
+          <select class="form-select" aria-label="Default select example" formControlName="level">
+            <option value="Básico">Básico</option>
+            <option value="Intermedio">Intermedio</option>
+            <option value="Avanzado">Avanzado</option>
+            <option value="Experto">Experto</option>
+          </select>
+          @if (form.controls.level.hasError('required')) {
+          <span class="fw-light text-danger">Este campo es obligatorio</span>
+          }
+        </div>
+        <div class="col-4">
+          <label for="price" class="form-label">Precio</label>
+          <input type="number" class="form-control" id="price" placeholder="100" formControlName="price">
+          @if (form.controls.price.hasError('min')) {
+          <span class="fw-light text-danger">El precio debe ser mayor a 0</span>
+          }
         </div>
       </div>
     </form>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-secondary" (click)="modal.close('Save click')">Save</button>
+    <button type="button" class="btn btn-dark" [disabled]="form.invalid"
+      (click)="modal.close()">Save</button>
   </div>
 </ng-template>
+
